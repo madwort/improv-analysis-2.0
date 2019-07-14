@@ -1,0 +1,24 @@
+label { 
+  display: inline-block;
+  width: 10em;
+}
+
+td.material {
+  margin: auto;
+  background: #fea18d;
+}
+
+td.formal {
+  margin: auto;
+  background: #93d1ff;
+}
+
+td.interface {
+  margin: auto;
+  background: #b7e695;
+}
+
+td.interaction {
+  margin: auto;
+  background: #fefca2;
+}
