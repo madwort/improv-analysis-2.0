@@ -21,6 +21,12 @@ function improv_analysis_analyses_list()
         <th>Links</th>
       </tr>
       <?php
+      if(count($result) == 0 &&
+         strpos($wpdb->last_error, "improv_analysis_analyses' doesn't exist"))
+      {
+        ?>Have you created the database tables?<?php
+      }
+
             foreach ($result as $key => $value) {
               ?><tr>
                 <td><?php echo $value->performer; ?></td>
