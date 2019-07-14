@@ -53,6 +53,7 @@ function improv_analysis_install_submit()
   `comment` varchar(127) COLLATE latin1_general_ci NOT NULL DEFAULT '',
   `date_filmed` date NOT NULL,
   `date_analysed` date NOT NULL,
+  `media_url` varchar(127) COLLATE latin1_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
     $result = $wpdb->get_results( $query );
