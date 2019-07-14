@@ -7,8 +7,9 @@
 
 ## How to install
 
-* copy plugin files to Wordpress install
-  * e.g. `cp -r /plugin $WORDPRESS_PATH/wp-content/plugins/improv-analysis-2.0`
+* get plugin files to Wordpress install
+  * e.g. `cp -r plugin/ $WORDPRESS_PATH/wp-content/plugins/improv-analysis-2.0`
+  * OR `ln -s ~user/improv-analysis-2.0/plugin $WORDPRESS_PATH/wp-content/plugins/improv-analysis-2.0`
 * enable plugin
 * manually create databases with the following SQL:
 
