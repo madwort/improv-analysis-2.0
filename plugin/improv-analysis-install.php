@@ -51,6 +51,8 @@ function improv_analysis_install_submit()
   `instruments` varchar(127) COLLATE latin1_general_ci NOT NULL DEFAULT '',
   `performer_count` int(11) NOT NULL DEFAULT '1',
   `comment` varchar(127) COLLATE latin1_general_ci NOT NULL DEFAULT '',
+  `date_filmed` date NOT NULL,
+  `date_analysed` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;";
     $result = $wpdb->get_results( $query );

@@ -17,6 +17,8 @@ function improv_analysis_analyses_list()
         <th>Events</th>
         <th>Instruments</th>
         <th>Performer count</th>
+        <th>Date filmed</th>
+        <th>Date analysed</th>
         <th>Comment</th>
         <th>Links</th>
       </tr>
@@ -37,6 +39,8 @@ function improv_analysis_analyses_list()
                 <td><?php echo $event_count; ?></td>
                 <td><?php echo $value->instruments; ?></td>
                 <td><?php echo $value->performer_count; ?></td>
+                <td><?php echo $value->date_filmed; ?></td>
+                <td><?php echo $value->date_analysed; ?></td>
                 <td><?php echo $value->comment; ?></td>
                 <td>
                   <a href="<?php echo

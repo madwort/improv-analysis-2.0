@@ -14,6 +14,8 @@ function improv_analysis_upload_analysis()
       <p><label for="url_id">URL id</label><input type="text" name="url_id" value="" id="url_id"></p>
       <p><label for="instruments">Instruments</label><input type="text" name="instruments" value="" id="instruments"></p>
       <p><label for="performer_count">Performer count</label><input type="text" name="performer_count" value="" id="performer_count"></p>
+      <p><label for="date_filmed">Date filmed</label><input type="date" name="date_filmed" value="" id="date_filmed"></p>
+      <p><label for="date_analysed">Date analysed</label><input type="date" name="date_analysed" value="" id="date_analysed"> </p>
       <p><label for="comment">Comment</label><input type="text" name="comment" value="" id="comment"></p>
       <p><input type="submit" value="Upload &rarr;"></p>
     </form>
@@ -32,15 +34,17 @@ function improv_analysis_upload_metadata()
   $query = 
     "INSERT INTO improv_analysis_analyses ".
     "(title, performer, duration, url_id, instruments, performer_count, ".
-    "comment) VALUES('". 
+    "comment, date_filmed, date_analysed) VALUES('". 
       $wpdb->_real_escape($_POST['title'])."','".
       $wpdb->_real_escape($_POST['performer'])."',".
       $wpdb->_real_escape($_POST['duration']).",'".
       $wpdb->_real_escape($_POST['url_id'])."','".
       $wpdb->_real_escape($_POST['instruments'])."',".
       $wpdb->_real_escape($_POST['performer_count']).",'".
-      $wpdb->_real_escape($_POST['comment']).
-    "')";
+      $wpdb->_real_escape($_POST['comment'])."','".
+      $wpdb->_real_escape($_POST['date_filmed'])."','".
+      $wpdb->_real_escape($_POST['date_analysed'])."'".
+    ")";
 
   $result = $wpdb->get_results( $query );
 
