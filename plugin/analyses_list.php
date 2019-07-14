@@ -15,6 +15,9 @@ function improv_analysis_analyses_list()
         <th>Title</th>
         <th>Duration(sec)</th>
         <th>Events</th>
+        <th>Instruments</th>
+        <th>Performer count</th>
+        <th>Comment</th>
         <th>Links</th>
       </tr>
       <?php
@@ -26,9 +29,14 @@ function improv_analysis_analyses_list()
                 <?php $event_count =
                   improv_analysis_get_event_count($value->id); ?>
                 <td><?php echo $event_count; ?></td>
+                <td><?php echo $value->instruments; ?></td>
+                <td><?php echo $value->performer_count; ?></td>
+                <td><?php echo $value->comment; ?></td>
                 <td>
                   <a href="<?php echo
-                   improv_analysis_analysis_edit_link($value->url_id); ?>">Edit</a>
+                   improv_analysis_analysis_edit_link($value->url_id); 
+                   ?>">Edit</a>
+                   <a href="#">View</a>
                 </td>
               </tr><?php
             }
