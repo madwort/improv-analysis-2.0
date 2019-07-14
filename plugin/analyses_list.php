@@ -1,26 +1,5 @@
 <?php
 
-function improv_analysis_get_event_count($analysis_id)
-{
-  global $wpdb;    
-  $result =
-    $wpdb->get_results("SELECT count(id) AS count FROM improv_analysis_events ".
-                       "WHERE analysis_id='".$analysis_id."'");
-  return $result[0]->count;
-}
-
-// TODO: refactor into previous function
-function improv_analysis_get_stream_count($analysis_id, $stream_id)
-{
-  global $wpdb;    
-  $query = "SELECT count(id) AS count FROM improv_analysis_events ".
-                       "WHERE analysis_id='".$analysis_id."' AND ".
-                       "stream='".$stream_id."'";
-  $result =
-    $wpdb->get_results($query);
-  return $result[0]->count;
-}
-
 function improv_analysis_analyses_list()
 {
     ?>
@@ -36,13 +15,6 @@ function improv_analysis_analyses_list()
         <th>Title</th>
         <th>Duration(sec)</th>
         <th>Events</th>
-        <th>Event/sec</th>
-        <?php $streams = improv_analysis_stream_data();
-        foreach ($streams as $stream) {
-          ?><th><?php echo $stream['name']; ?></th>
-          <?php
-        }
-        ?>
         <th>Links</th>
       </tr>
       <?php
@@ -54,14 +26,6 @@ function improv_analysis_analyses_list()
                 <?php $event_count =
                   improv_analysis_get_event_count($value->id); ?>
                 <td><?php echo $event_count; ?></td>
-                <td><?php echo round($event_count/$value->duration,2); ?></td>
-                <?php
-                foreach ($streams as $stream) {
-                  ?><td><?php 
-                  echo round(improv_analysis_get_stream_count($value->id, 
-                                 $stream['id'])/$event_count*100); ?>%</td><?php
-                }
-                ?>
                 <td>
                   <a href="<?php echo
                    improv_analysis_analysis_edit_link($value->url_id); ?>">Edit</a>

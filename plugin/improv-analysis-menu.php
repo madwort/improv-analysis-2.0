@@ -34,7 +34,7 @@ function improv_analysis_redirect_analyses_list()
 }
 
 include_once('analyses_list.php');
-
+include_once('analyses_stats.php');
 include_once('analysis_edit.php');
 
 function improv_analysis_install()
@@ -90,6 +90,16 @@ function improv_analysis_options_page() {
   );
   add_action( 'load-' . $list_hookname, 'improv_analysis_css_load' );
   
+  $stats_hookname = add_submenu_page(
+    'improv-analysis',
+    'Analysis stats',
+    'Stats',
+    'improv-analysis-options',
+    'improv-analysis-stats',
+    'improv_analysis_analyses_stats'
+  );
+  add_action( 'load-' . $list_hookname, 'improv_analysis_css_load' );
+
   $analysis_edit_hookname = add_submenu_page(
       'improv-analysis',
       'Analysis editor',
@@ -101,7 +111,7 @@ function improv_analysis_options_page() {
   add_action( 'load-' . $analysis_edit_hookname, 
              'improv_analysis_analysis_edit_submit' );
   add_action( 'load-' . $analysis_edit_hookname, 'improv_analysis_css_load' );
-    
+
   $upload_hookname = add_submenu_page(
       'improv-analysis',
       'Upload analysis',
