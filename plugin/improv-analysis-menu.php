@@ -36,38 +36,8 @@ function improv_analysis_redirect_analyses_list()
 include_once('analyses_list.php');
 include_once('analyses_stats.php');
 include_once('analysis_edit.php');
-
-function improv_analysis_install()
-{
-  // run SQL to setup db
-  ?>
-  <div class="wrap">
-    <h1>Improv Analysis Administration Panel</h1>
-    EDIT THIS!
-    <?php
-    
-    global $wpdb;
-    $query = "SELECT * FROM improv_analysis_analyses WHERE url_id = '".
-              $analysis_to_edit."';";
-    echo $query;
-    $result = $wpdb->get_results( $query );
-    ?><table>
-    <tr><th>Performer</th><th>Title</th><th>Duration</th><th></th></tr>
-    <?php
-          foreach ($result as $key => $value) {
-            ?><tr>
-              <td><?php echo $value->performer; ?></td>
-              <td><?php echo $value->title; ?></td>
-              <td><?php echo $value->duration; ?></td>
-            </tr><?php
-          }
-    ?></table><?php
-    ?>
-  </div>
-  <?php
-}
-
 include_once('analysis_upload.php');
+include_once('improv-analysis-install.php');
 
 function improv_analysis_css_load(){
   wp_enqueue_style( 'improv_analysis_css' );
@@ -123,6 +93,17 @@ function improv_analysis_options_page() {
   add_action( 'load-' . $upload_hookname, 'improv_analysis_upload_submit' );
   add_action( 'load-' . $upload_hookname, 'improv_analysis_css_load' );
   
+  $install_hookname = add_submenu_page(
+      'improv-analysis',
+      'Install',
+      'Install',
+      'improv-analysis-options',
+      'improv-analysis-install',
+      'improv_analysis_install'
+  );
+  add_action( 'load-' . $install_hookname, 
+             'improv_analysis_install_submit' );
+  add_action( 'load-' . $install_hookname, 'improv_analysis_css_load' );
 }
 
 add_action( 'admin_menu', 'improv_analysis_options_page' );
