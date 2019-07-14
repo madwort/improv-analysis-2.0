@@ -3,22 +3,22 @@ label {
   width: 10em;
 }
 
-td.material {
+td {
   margin: auto;
+}
+
+.material {
   background: #fea18d;
 }
 
-td.formal {
-  margin: auto;
+.formal {
   background: #93d1ff;
 }
 
-td.interface {
-  margin: auto;
+.interface {
   background: #b7e695;
 }
 
-td.interaction {
-  margin: auto;
+.interaction {
   background: #fefca2;
 }

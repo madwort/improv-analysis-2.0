@@ -32,7 +32,8 @@ function improv_analysis_analyses_stats()
         <th>Event/sec</th>
         <?php $streams = improv_analysis_stream_data();
         foreach ($streams as $stream) {
-          ?><th><?php echo $stream['name']; ?></th>
+          ?><th class="<?php echo strtolower($stream['name']); ?>"><?php 
+            echo $stream['name']; ?></th>
           <?php
         }
         ?>
