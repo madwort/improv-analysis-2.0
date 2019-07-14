@@ -1,23 +1,16 @@
 <?php
 
-function improv_analysis_get_event_count($analysis_id)
-{
-  global $wpdb;    
-  $result =
-    $wpdb->get_results("SELECT count(id) AS count FROM improv_analysis_events ".
-                       "WHERE analysis_id='".$analysis_id."'");
-  return $result[0]->count;
-}
-
-// TODO: refactor into previous function
-function improv_analysis_get_stream_count($analysis_id, $stream_id)
+function improv_analysis_get_event_count($analysis_id, $stream_id = 0)
 {
   global $wpdb;    
   $query = "SELECT count(id) AS count FROM improv_analysis_events ".
-                       "WHERE analysis_id='".$analysis_id."' AND ".
-                       "stream='".$stream_id."'";
-  $result =
-    $wpdb->get_results($query);
+                       "WHERE analysis_id='".$analysis_id."'";
+
+  if ($stream_id != 0) {
+    $query .= " AND stream='".$stream_id."'";
+  }
+
+  $result = $wpdb->get_results($query);
   return $result[0]->count;
 }
 
@@ -58,7 +51,7 @@ function improv_analysis_analyses_stats()
                 <?php
                 foreach ($streams as $stream) {
                   ?><td><?php 
-                  echo round(improv_analysis_get_stream_count($value->id, 
+                  echo round(improv_analysis_get_event_count($value->id, 
                                  $stream['id'])/$event_count*100); ?>%</td><?php
                 }
                 ?>
