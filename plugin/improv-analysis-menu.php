@@ -3,7 +3,7 @@
 Plugin Name: Improv Analysis Database & Menu
 Plugin URI: http://www.rodrigoconstanzo.com
 Description: Store Rodrigo's Improv Analysis data in the db
-Version: 0.5
+Version: 0.6
 Author: MADWORT
 Author URI: http://www.madwort.co.uk
 */
