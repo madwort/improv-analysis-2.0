@@ -8,7 +8,7 @@ function improv_analysis_analyses_list()
 
       <p><a href="<?php 
         echo menu_page_url( 'improv-analysis-edit',false)."&csv=1"; 
-        ?>">Download CSV</a></p>
+        ?>">Download analysis metadata CSV</a></p>
 
       <?php
       
@@ -52,6 +52,9 @@ function improv_analysis_analyses_list()
                    improv_analysis_analysis_edit_link($value->url_id); 
                    ?>">Edit</a>
                    <a href="#">View</a>
+                  <a href="<?php echo
+                   improv_analysis_analysis_edit_link($value->url_id)."&csv=1"; 
+                   ?>">CSV</a>
                 </td>
               </tr><?php
             }
@@ -68,7 +71,6 @@ function improv_analysis_list_submit()
     return;
   }
 
-  // output headers so that the file is downloaded rather than displayed
   header('Content-type: text/csv');
   header('Content-Disposition: attachment; filename="analysis-db.csv"');
   header('Pragma: no-cache');

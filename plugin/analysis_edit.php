@@ -67,24 +67,58 @@ function improv_analysis_analysis_edit()
   <?php
 }
 
+function improv_analysis_analysis_download_csv()
+{
+  header('Content-type: text/csv');
+  header('Content-Disposition: attachment; filename="analysis-db.csv"');
+  header('Pragma: no-cache');
+  header('Expires: 0');
+ 
+  $file = fopen('php://output', 'w');
+ 
+  fputcsv($file, array('time', 'stream', 'comment'));
+
+  global $wpdb;
+  $query =
+    "SELECT time,stream,comment from improv_analysis_events WHERE analysis_id=".
+      "(SELECT id from improv_analysis_analyses WHERE url_id='".
+      $wpdb->_real_escape($_GET['analysis'])."' LIMIT 1) ORDER BY id";
+
+  $analysis_list = $wpdb->get_results($query, ARRAY_N);
+  
+  foreach ($analysis_list as $analysis)
+  {
+    fputcsv($file, $analysis);
+  }
+ 
+  exit();
+}
+
+function improv_analysis_analysis_save_changes()
+{
+  global $wpdb;
+  foreach ($_POST['stream'] as $key => $value) {
+    $query = "UPDATE improv_analysis_events SET stream = ".
+              $wpdb->_real_escape($value)." WHERE ".
+             "id = '".$wpdb->_real_escape($key)."'";
+    $result = $wpdb->get_results( $query );
+    
+  }
+}
+
 function improv_analysis_analysis_edit_submit()
 {
     if (!improv_analysis_url_id_exists($_GET['analysis'])) {
       improv_analysis_redirect_analyses_list();
     };
 
-    if('POST' !== $_SERVER['REQUEST_METHOD']) {
-      return;
-    };
-
-    global $wpdb;
-    foreach ($_POST['stream'] as $key => $value) {
-      $query = "UPDATE improv_analysis_events SET stream = ".
-                $wpdb->_real_escape($value)." WHERE ".
-               "id = '".$wpdb->_real_escape($key)."'";
-      $result = $wpdb->get_results( $query );
-      
+    if($_GET['csv'] === "1") {
+      improv_analysis_analysis_download_csv();
     }
+
+    if('POST' === $_SERVER['REQUEST_METHOD']) {
+      improv_analysis_analysis_save_changes();
+    };
 }
 
 ?>
