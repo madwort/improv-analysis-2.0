@@ -7,7 +7,7 @@ function improv_analysis_analyses_list()
       <h1>Improv Analysis Administration Panel</h1>
 
       <p><a href="<?php 
-        echo menu_page_url( 'improv-analysis-edit',false)."&csv=1"; 
+        echo menu_page_url( 'improv-analysis',false)."&csv=1"; 
         ?>">Download analysis metadata CSV</a></p>
 
       <?php
