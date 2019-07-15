@@ -5,6 +5,11 @@ function improv_analysis_analyses_list()
     ?>
     <div class="wrap">
       <h1>Improv Analysis Administration Panel</h1>
+
+      <p><a href="<?php 
+        echo menu_page_url( 'improv-analysis-edit',false)."&csv=1"; 
+        ?>">Download CSV</a></p>
+
       <?php
       
       global $wpdb;    
@@ -50,9 +55,44 @@ function improv_analysis_analyses_list()
                 </td>
               </tr><?php
             }
-      ?></table><?php
+      ?></table>
+      <?php
       ?>
     </div>
     <?php
 }
+
+function improv_analysis_list_submit()
+{
+  if ($_GET['csv'] !== '1'){
+    return;
+  }
+
+  // output headers so that the file is downloaded rather than displayed
+  header('Content-type: text/csv');
+  header('Content-Disposition: attachment; filename="analysis-db.csv"');
+  header('Pragma: no-cache');
+  header('Expires: 0');
+ 
+  $file = fopen('php://output', 'w');
+ 
+  fputcsv($file, 
+          array('id', 'name', 'title', 'date filmed', 'date analysed',
+                'duration', 'url id', 'instruments', 'performer count',
+                'comments', 'media url'));
+
+  global $wpdb;
+  $query = "SELECT id, performer, title, date_filmed, date_analysed,
+                duration, url_id, instruments, performer_count,
+                comment, media_url from improv_analysis_analyses ORDER BY id";
+  $analysis_list = $wpdb->get_results($query, ARRAY_N);
+  
+  foreach ($analysis_list as $analysis)
+  {
+    fputcsv($file, $analysis);
+  }
+ 
+  exit();
+}
+
 ?>

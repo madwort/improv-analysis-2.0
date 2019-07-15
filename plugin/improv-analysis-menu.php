@@ -58,6 +58,7 @@ function improv_analysis_options_page() {
     'improv-analysis',
     'improv_analysis_analyses_list'
   );
+  add_action( 'load-' . $list_hookname, 'improv_analysis_list_submit' );
   add_action( 'load-' . $list_hookname, 'improv_analysis_css_load' );
   
   $stats_hookname = add_submenu_page(
