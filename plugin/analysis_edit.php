@@ -70,7 +70,8 @@ function improv_analysis_analysis_edit()
 function improv_analysis_analysis_download_csv()
 {
   header('Content-type: text/csv');
-  header('Content-Disposition: attachment; filename="analysis-db.csv"');
+  header('Content-Disposition: attachment; filename="'.
+          $_GET['analysis'].'.csv"');
   header('Pragma: no-cache');
   header('Expires: 0');
  
